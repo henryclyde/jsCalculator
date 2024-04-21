@@ -20,4 +20,6 @@ function solution() {
 
 }
 let divs = [...document.querySelectorAll('div')].filter(div => div.parentNode.classList.contains('buttons'));
-divs.forEach(item in divs)
+divs.forEach((btn) => btn.addEventListener("click", function() {
+    document.getElementById('screen').textContent = btn.textContent;
+}));

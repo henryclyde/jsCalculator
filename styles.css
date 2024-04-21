@@ -7,6 +7,9 @@ body {
     display: flex;
     justify-content: center;
     background-color: black;
+    font-family: "Noto Sans Math", Helvetica;
+    /* font-family: Helvetica; */
+    /* font-family: "Google Sans", Roboto, arial, sans-serif */
 
 }
 
@@ -14,32 +17,38 @@ body {
     width: 500px;
     margin-top: 30px;
     background-color: black;
-    font-size: 100px;
+    font-size: 500%;
 }
-.screen {
+#screen {
     background-color: black;
-    /* background-color: aliceblue; */
-    /* border: 1px solid gray; */
-    padding: 15px;
+    padding-right: 15px;
     margin: 10px;
     color: white;
     text-align: right;
-    font-family: Helvetica;
 }
 
 .buttons {
+    text-align: center;
+    font-size: 50px;
+    color:white;
     display: flex;
     flex-wrap:wrap;
+    cursor: default;
+
 }
 
 .orangeBtn {
-    background-color:darkorange;
+    background-color:rgb(182, 100, 0);
 }
 .lightBtn {
-    background-color:rgb(161, 160, 160);
+    background-color:rgb(134, 134, 134);
+    color: black;
+    font-size:xx-large;
+    font-weight: bold;
+    font-family: Helvetica;
 }
 .grayBtn {
-    background-color:rgb(44, 53, 53);
+    background-color:rgb(28, 34, 34);
 }
 
 #zero {
@@ -50,11 +59,12 @@ body {
 }
 
 .buttons div {
-    /* padding-top: 25px;
-    padding-bottom: 25px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 20%;
     height: 0;
-    padding-top: 20%;
+    padding: 10% 0;
     border-radius: 50%;
     flex-basis: 18%;
     flex-grow: 1;
