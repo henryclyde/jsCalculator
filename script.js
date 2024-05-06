@@ -1,5 +1,5 @@
 function add(n1,n2) {
-    return n1+n2;
+    return n1 + n2;
 }
 function subtract(n1,n2) {
     return n1-n2;
@@ -11,23 +11,23 @@ function divide(n1,n2) {
     return n1 / n2;
 }
 let n1,op,n2,op2;
+let resetNum = false;
 
 const screen = document.getElementById('screen');
 
-function operate(n1,op,n2) {
-    
+function operate(num1,op,num2) {
     switch (op) {
         case "÷":
-            screen.textContent = divide(n1,n2);
+            return divide(num1,num2);
             break;
         case "x":
-            screen.textContent = multiply(n1,n2);
+            return multiply(num1,num2);
             break;
         case "-":
-            screen.textContent = subtract(n1,n2);
+            return subtract(num1,num2);
             break;
         case "+":
-            screen.textContent = add(n1,n2);
+            return add(num1,num2);
             break;
         default:
             break;
@@ -35,14 +35,28 @@ function operate(n1,op,n2) {
 }
 
 function inputNum(btnClicked) {
-    if (screen.textContent == 0) screen.textContent = btnClicked;
-    else screen.textContent = screen.textContent.concat(btnClicked);
+    if(!resetNum) {
+        if (screen.textContent == 0) screen.textContent = btnClicked;
+        else screen.textContent = screen.textContent.concat(btnClicked);
+        if (n1 && op) n2 = screen.textContent;
+    }
+    else {
+        screen.textContent = btnClicked;
+        if (n1 && op) n2 = screen.textContent;
+        resetNum = false;
+    }
+        // else if (n1 !== undefined && op !== undefined && n2 !== undefined) {
+    //     screen.textContent = screen.textContent.concat(btnClicked);
+    //     n2 = screen.textContent;
+    // }
 }
 
 function currentOption(btnClicked) {
     switch (btnClicked) {
         case "AC":
-            n1,op,n2 = undefined;
+            n1 = undefined;
+            op = undefined;
+            n2 = undefined;
             screen.textContent = 0;
             break;
         case "+/-":
@@ -55,22 +69,28 @@ function currentOption(btnClicked) {
             break;
     }
 }
-function currentOperation(btnClicked) {
-    // if(op !== undefined) {
-    //     op2 = btnClicked;
-    //     operate(n1,op,n2)
-    //     op = op2;
-    //     op2 = undefined;
-    // }
-    n1 = screen.textContent;
-    op = btnClicked;
 
-    if(n1 !== undefined) {
-        n1 = Number(screen.textContent);
-        screen.textContent = '0';
+function currentOperation(btnClicked) {
+    if(!n2) {
+        n1 = screen.textContent;
         op = btnClicked;
+        resetNum = true;
     }
-    
+    else { //finish the calculation, since it's the second press of an operation key
+        console.log(n1, n2, op);
+        // n2 = screen.textContent; // if operation is chosen, lock num2 before operating
+        screen.textContent = operate(Number(n1),op,Number(n2));
+        n1 = screen.textContent;
+        n2 = undefined;
+        resetNum = true; //reset baord when numbers are typed.
+
+    }
+    // else {
+    //     screen.textContent = operate(Number(n1),op,Number(n2));
+    //     console.log(Number("answer: " + operate(Number(n1),op,Number(n2))));
+    //     console.log(Number(op))
+    //     console.log(Number(n2))
+    // }
 }
 
 
@@ -85,8 +105,9 @@ btnNum.forEach((btn) => btn.addEventListener("click", function() {
 }));
 
 btnOper.forEach((btn) => btn.addEventListener("click", function() {
-    if (n1 !== undefined && op !== undefined && screen.textContent !== undefined) operate(n1,op,n2);
-    else currentOperation(btn.textContent);
+    // if (n1 !== undefined && op !== undefined && screen.textContent !== 0) operate(Number(n1),op,Number(n2));
+    // else currentOperation(btn.textContent);
+    currentOperation(btn.textContent);
 }));
 
 btnOption.forEach((btn) => btn.addEventListener("click", function() {
