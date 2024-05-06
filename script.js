@@ -23,8 +23,10 @@ function inputadd(btnClicked) {
        screen.textContent = screen.textContent.concat(btnClicked.textContent);
     }
 }
-let divs = [...document.querySelectorAll('div')].filter(div => div.parentNode.classList.contains('buttons'));
-divs.forEach((btn) => btn.addEventListener("click", function() {
+let btnNum = [...document.querySelectorAll('div')].filter(div => div.classList.contains('grayBtn'));
+let btnOp = [...document.querySelectorAll('div')].filter(div => div.classList.contains('grayBtn'));
+let btn = [...document.querySelectorAll('div')].filter(div => div.parentNode.classList.contains('buttons'));
+btnNum.forEach((btn) => btn.addEventListener("click", function() {
    // document.getElementById('screen').textContent = btn.textContent;
    inputadd(btn);
 }));
