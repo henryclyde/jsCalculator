@@ -37,17 +37,17 @@ body {
 
 }
 
-.orangeBtn {
+.operator {
     background-color:rgb(182, 100, 0);
 }
-.lightBtn {
+.option {
     background-color:rgb(134, 134, 134);
     color: black;
     font-size:xx-large;
     font-weight: bold;
     font-family: Helvetica;
 }
-.grayBtn {
+.number {
     background-color:rgb(28, 34, 34);
 }
 
