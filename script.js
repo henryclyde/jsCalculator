@@ -10,10 +10,23 @@ function multiply(n1,n2) {
 function divide(n1,n2) {
     return n1 / n2;
 }
-let n1,op,n2,op2;
-let resetNum = false;
+function percent(num) {
+    return (num / 100)
+}
+function posNeg(num) {
+    return num * -1;
+}
+function clear() {
+    n1 = undefined;
+    op = undefined;
+    n2 = undefined;
+    screen.textContent = 0;
+}
 
+let n1,op,n2,op2;
+let resetNum = true;
 const screen = document.getElementById('screen');
+let screenNum = Number(screen.textContent);
 
 function operate(num1,op,num2) {
     switch (op) {
@@ -36,7 +49,9 @@ function operate(num1,op,num2) {
 
 function inputNum(btnClicked) {
     if(!resetNum) {
-        if (screen.textContent == 0) screen.textContent = btnClicked;
+        if (resetNum) {
+            screen.textContent = btnClicked;
+        }
         else screen.textContent = screen.textContent.concat(btnClicked);
         if (n1 && op) n2 = screen.textContent;
     }
@@ -45,25 +60,18 @@ function inputNum(btnClicked) {
         if (n1 && op) n2 = screen.textContent;
         resetNum = false;
     }
-        // else if (n1 !== undefined && op !== undefined && n2 !== undefined) {
-    //     screen.textContent = screen.textContent.concat(btnClicked);
-    //     n2 = screen.textContent;
-    // }
 }
 
 function currentOption(btnClicked) {
     switch (btnClicked) {
         case "AC":
-            n1 = undefined;
-            op = undefined;
-            n2 = undefined;
-            screen.textContent = 0;
+            clear();
             break;
         case "+/-":
-            console.log("plus minus");
+            screen.textContent = posNeg(Number(screen.textContent));
             break;
         case "%":
-            console.log("percent");
+            screen.textContent = percent(Number(screen.textContent));
             break;
         default:
             break;
@@ -74,23 +82,14 @@ function currentOperation(btnClicked) {
     if(!n2) {
         n1 = screen.textContent;
         op = btnClicked;
-        resetNum = true;
     }
-    else { //finish the calculation, since it's the second press of an operation key
+    else {
         console.log(n1, n2, op);
-        // n2 = screen.textContent; // if operation is chosen, lock num2 before operating
         screen.textContent = operate(Number(n1),op,Number(n2));
         n1 = screen.textContent;
         n2 = undefined;
-        resetNum = true; //reset baord when numbers are typed.
-
     }
-    // else {
-    //     screen.textContent = operate(Number(n1),op,Number(n2));
-    //     console.log(Number("answer: " + operate(Number(n1),op,Number(n2))));
-    //     console.log(Number(op))
-    //     console.log(Number(n2))
-    // }
+    resetNum = true;
 }
 
 
@@ -105,13 +104,9 @@ btnNum.forEach((btn) => btn.addEventListener("click", function() {
 }));
 
 btnOper.forEach((btn) => btn.addEventListener("click", function() {
-    // if (n1 !== undefined && op !== undefined && screen.textContent !== 0) operate(Number(n1),op,Number(n2));
-    // else currentOperation(btn.textContent);
     currentOperation(btn.textContent);
 }));
 
 btnOption.forEach((btn) => btn.addEventListener("click", function() {
     currentOption(btn.textContent);
 }));
-
-//create dor loops for dofferent types of buttons.
