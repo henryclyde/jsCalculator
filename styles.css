@@ -1,12 +1,16 @@
-* {
-    /* border: 1px solid gray; */
-
+body {
+    background-color: black;
+    color: white;
+    font-family: "Noto Sans Math", Helvetica;
 }
 
-body {
+#header {
+    margin: 20px;
+}
+
+.container {
     display: flex;
     justify-content: center;
-    background-color: black;
     font-family: "Noto Sans Math", Helvetica;
     /* font-family: Helvetica; */
     /* font-family: "Google Sans", Roboto, arial, sans-serif */
